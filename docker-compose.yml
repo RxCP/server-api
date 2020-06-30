@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  serveradmin:
+  app:
     build:
       context: .
       target: development
