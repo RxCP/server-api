@@ -9,6 +9,7 @@ jobs:
       - checkout
       - node/with-cache:
           steps:
+            - run: sudo npm install -g @foal/cli
             - run: npm install
             - run: npm test
 workflows:
