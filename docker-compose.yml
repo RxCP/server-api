@@ -2,7 +2,6 @@ version: '3.7'
 
 services:
   serveradmin:
-    container_name: webapp
     build:
       context: .
       target: development
@@ -20,7 +19,6 @@ services:
       - db
 
   db:
-    container_name: db
     image: mysql:5.7
     restart: always
     networks:
@@ -36,7 +34,6 @@ services:
       - mysqldata:/var/lib/mysql
 
   adminer:
-    container_name: adminer
     image: adminer
     restart: always
     networks:
