@@ -37,3 +37,5 @@ or run containers in the background
 ```
 docker-compose up -d
 ```
+To access the app, go to http://localhost:3001/ in your browser.<br>
+Adminer can be accessed at http://localhost:3002
