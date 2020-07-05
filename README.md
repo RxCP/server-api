@@ -1,3 +1,6 @@
+<h1 align="center">RxCP</h1>
+<h2 align="center">rAthena server-side API and admin dashboard.</h2>
+<p align="center">The most advanced open-source Control Panel for rAthena servers.</p>
 <p align="center">
   <a href="https://circleci.com/gh/RxCP/serveradmin">
     <img src="https://circleci.com/gh/RxCP/serveradmin.svg?style=svg">
@@ -17,23 +20,5 @@
   </a>
 </p>
 
-## Requirements
-- Docker Engine
-- Docker Compose
-- NodeJs (>=8)
-
-## Development
-### Running the app for the first time
-Create .env file (see .env.example for the list of available environment variables) or run
-```
-npm run init:env
-```
-
-### Starting the app
-```
-docker-compose up
-```
-or run containers in the background
-```
-docker-compose up -d
-```
+## License
+RxCP is [MIT licensed](LICENSE.md).

@@ -8,10 +8,17 @@
       "cookie": {
         "sameSite": "lax"
       }
-    }
+    },
+    "templateEngine": "twig"
   },
+  "theme": "default",
   "database": {
-    "database": "./db.sqlite3",
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "ragnarok",
+    "database": "rxcp",
     "synchronize": false
-  }
+  },
+  "ragnarok": {}
 }

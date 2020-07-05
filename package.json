@@ -27,6 +27,7 @@
     "migration:generate": "./node_modules/.bin/typeorm migration:generate",
     "migration:run": "./node_modules/.bin/typeorm migration:run",
     "migration:revert": "./node_modules/.bin/typeorm migration:revert",
+    "format": "prettier --write \"src/**/*.ts\"",
     "init:env": "cp .env.example .env"
   },
   "engines": {
@@ -35,21 +36,26 @@
   "dependencies": {
     "@foal/core": "^1.0.0",
     "@foal/typeorm": "^1.0.0",
-    "mysql": "^2.18.1",
+    "@types/express": "^4.17.6",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
     "source-map-support": "^0.5.1",
     "typeorm": "0.2.24"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.1",
     "@types/node": "^8.0.47",
-    "concurrently": "^3.5.1",
-    "copy": "^0.3.2",
-    "mocha": "^5.2.0",
-    "supertest": "^3.3.0",
-    "supervisor": "^0.12.0",
-    "eslint": "^6.7.0",
+    "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "~2.7.0",
     "@typescript-eslint/parser": "~2.7.0",
+    "concurrently": "^3.5.1",
+    "copy": "^0.3.2",
+    "eslint": "^6.7.0",
+    "mocha": "^5.2.0",
+    "prettier": "2.0.5",
+    "supertest": "^3.3.0",
+    "supervisor": "^0.12.0",
+    "twig": "^1.15.1",
     "typescript": "~3.5.3"
   }
 }

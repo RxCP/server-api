@@ -9,18 +9,22 @@ import { createConnection } from 'typeorm';
 
 // App
 import { AppController } from './app/app.controller';
+import { AutoloadPlugins } from './app/services/plugin';
 
 async function main() {
   await createConnection();
 
-  const app = createApp(AppController);
+  const app = createApp(AppController, AutoloadPlugins());
 
   const httpServer = http.createServer(app);
   const port = Config.get2('port', 'number', 3001);
+
   httpServer.listen(port, () => {
     console.log(`Listening on port ${port}...`);
   });
 }
 
-main()
-  .catch(err => { console.error(err); process.exit(1); });
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

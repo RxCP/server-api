@@ -5,6 +5,10 @@ npm-debug.log*
 node_modules
 npm-debug.log
 
+build
+admin
+.circleci
+
 # Coverage files
 coverage
 .nyc_output
