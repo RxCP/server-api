@@ -1,8 +1,8 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.foal.json",
   "include": [
-    "src/app/**/*.ts",
-    "src/scripts/*.ts",
-    "src/test.ts"
+    "server/app/**/*.ts",
+    "server/scripts/*.ts",
+    "server/test.ts"
   ]
 }

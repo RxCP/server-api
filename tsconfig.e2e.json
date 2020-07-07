@@ -1,11 +1,11 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.foal.json",
   "include": [
-    "src/app/**/*.ts",
-    "src/e2e/**/*.ts",
-    "src/e2e.ts"
+    "server/app/**/*.ts",
+    "server/e2e/**/*.ts",
+    "server/e2e.ts"
   ],
   "exclude": [
-    "src/app/**/*.spec.ts"
+    "server/app/**/*.spec.ts"
   ]
 }

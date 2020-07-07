@@ -1,9 +1,9 @@
 {
-  "extends": "./tsconfig.json",
+  "extends": "./tsconfig.foal.json",
   "compilerOptions": {
     "sourceMap": false
   },
   "include": [
-    "src/migrations/*.ts"
+    "server/migrations/*.ts"
   ]
 }
