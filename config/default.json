@@ -9,9 +9,8 @@
         "sameSite": "lax"
       }
     },
-    "templateEngine": "twig"
+    "adminPublicDir": "./public"
   },
-  "theme": "default",
   "database": {
     "host": "localhost",
     "port": 3306,

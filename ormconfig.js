@@ -17,7 +17,7 @@ module.exports = {
     'build/app/plugins/**/migrations/*.js'
   ],
   cli: {
-    migrationsDir: 'src/migrations'
+    migrationsDir: 'server/migrations'
   },
   synchronize: Config.get2('database.synchronize', 'boolean', false)
 };

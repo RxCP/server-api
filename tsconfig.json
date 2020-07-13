@@ -1,25 +1,22 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
+    "outDir": "build",
+    "sourceMap": true,
+    "experimentalDecorators": true,
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react"
+    "noImplicitAny": false,
+    "strictPropertyInitialization": false,
+    "module": "commonjs",
+    "target": "es2017",
+    "rootDir": "server",
+    "lib": [
+      "es2017",
+      "dom"
+    ]
   },
   "include": [
-    "src"
+    "server/**/*.ts"
   ]
 }

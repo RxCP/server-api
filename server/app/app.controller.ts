@@ -1,12 +1,14 @@
-import { controller, Get, HttpResponseNotFound } from '@foal/core';
+import {
+  controller,
+  Get,
+  HttpResponseNotFound,
+  HttpResponseMovedPermanently,
+} from '@foal/core';
 
 import { ApiController, AdminController } from './controllers';
 
 export class AppController {
-  subControllers = [
-    controller('/api', ApiController),
-    controller('/admin', AdminController),
-  ];
+  subControllers = [controller('/api', ApiController)];
 
   @Get('*')
   notFound() {
