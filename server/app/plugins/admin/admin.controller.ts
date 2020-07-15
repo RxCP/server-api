@@ -4,20 +4,17 @@ import {
   HttpResponseNotFound,
   Config,
   render,
-  dependency,
 } from '@foal/core';
-import { TypeORMStore } from '@foal/typeorm';
 
-export class AdminModule {
-  @dependency
-  store: TypeORMStore;
-
+export class AdminController {
   adminPublicDir = Config.get2('settings.adminPublicDir', 'string');
 
-  @Get('/admin')
+  @Get('*')
   admin(ctx: Context) {
     if (!ctx.request.accepts('html')) {
-      return new HttpResponseNotFound();
+      return new HttpResponseNotFound({
+        message: 'The page your are looking for does not exist',
+      });
     }
 
     return render(`${this.adminPublicDir}/index.html`);

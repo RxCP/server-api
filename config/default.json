@@ -9,6 +9,9 @@
         "sameSite": "lax"
       }
     },
+    "ajv": {
+      "allErrors": true
+    },
     "adminPublicDir": "./public"
   },
   "database": {

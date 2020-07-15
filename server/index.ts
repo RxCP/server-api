@@ -14,7 +14,8 @@ import { AutoloadPlugins } from './app/services/plugin';
 async function main() {
   await createConnection();
 
-  const app = createApp(AppController, { expressInstance: AutoloadPlugins() });
+  // const app = createApp(AppController, { expressInstance: AutoloadPlugins() });
+  const app = createApp(AppController);
 
   const httpServer = http.createServer(app);
   const port = Config.get2('port', 'number', 3001);
