@@ -1,4 +1,9 @@
 {
+  "settings": {
+    "jwt": {
+      "secretOrPublicKey": "secret"
+    }
+  },
   "database": {
     "database": "./test_db.sqlite3",
     "dropSchema": true,

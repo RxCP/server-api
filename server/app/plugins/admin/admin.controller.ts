@@ -1,10 +1,4 @@
-import {
-  Get,
-  Context,
-  HttpResponseNotFound,
-  Config,
-  render,
-} from '@foal/core';
+import { Get, Context, HttpResponseNotFound, Config, render } from '@foal/core';
 
 export class AdminController {
   adminPublicDir = Config.get2('settings.adminPublicDir', 'string');
