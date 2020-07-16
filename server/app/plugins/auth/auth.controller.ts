@@ -27,7 +27,7 @@ export class AuthController {
 
     try {
       const authToken = await this.authService.loginUser(userToLogin);
-      return new HttpResponseOK({ accessToken: authToken });
+      return new HttpResponseOK(authToken);
     } catch (message) {
       return new HttpResponseBadRequest({
         message: 'Invalid email or password',
