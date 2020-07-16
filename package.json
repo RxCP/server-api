@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "rxcp-serveradmin",
+  "name": "server-api",
   "description": "",
   "scripts": {
     "build:app": "foal rmdir build/app && copy-cli \"server/**/*.html\" build && tsc -p tsconfig.app.json",
