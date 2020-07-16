@@ -41,7 +41,7 @@ export class UserService {
       const errorMsg = Config.get2('settings.debug', 'boolean')
         ? error.message
         : 'Something went wrong!';
-      return Promise.reject({ message: errorMsg });
+      return Promise.reject(errorMsg);
     }
   }
 }
