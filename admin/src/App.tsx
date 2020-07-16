@@ -22,15 +22,14 @@ function App() {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      axios.post('/api/auth/check')
-      .catch(err => {
+      axios.post('/api/auth/check').catch((err) => {
         // logout
         setAuthToken('');
         localStorage.setItem('token', '');
         window.location.reload();
-      })
+      });
     }
-  }, [])
+  }, []);
 
   return (
     <>

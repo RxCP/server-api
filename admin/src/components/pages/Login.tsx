@@ -1,5 +1,5 @@
-import React from 'react';
 import LoginForm from '@patterns/molecules/forms/loginForm';
+import React from 'react';
 
 function LoginPage() {
   return (

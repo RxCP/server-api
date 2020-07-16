@@ -1,9 +1,9 @@
+import { useAuthContext } from '@/context/auth';
+import TextInput from '@patterns/atoms/TextInput';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import TextInput from '@patterns/atoms/TextInput';
-import { useAuthContext } from '@/context/auth';
 import { useHistory } from 'react-router';
-import axios from 'axios';
 
 interface IFormValues {
   email: string;
@@ -46,7 +46,10 @@ function LoginForm() {
         } else {
           if (err.response.data.message) {
             setServerErrors([
-              { property: '400', constraints: { err: err.response.data.message } },
+              {
+                property: '400',
+                constraints: { err: err.response.data.message },
+              },
             ]);
           } else {
             setServerErrors(err.response.data);
