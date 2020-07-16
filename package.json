@@ -28,7 +28,9 @@
     "migration:run": "./node_modules/.bin/typeorm migration:run",
     "migration:revert": "./node_modules/.bin/typeorm migration:revert",
     "format": "prettier --write \"server/**/*.ts\"",
-    "init:env": "cp .env.example .env"
+    "init:env": "cp .env.example .env",
+    "snyk-protect": "snyk protect",
+    "prepare": "yarn run snyk-protect"
   },
   "engines": {
     "node": ">=8"
@@ -43,6 +45,7 @@
     "express-rate-limit": "^5.1.3",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.1.0",
+    "snyk": "^1.362.0",
     "source-map-support": "^0.5.1",
     "typeorm": "0.2.24",
     "yup": "^0.29.1"
@@ -68,5 +71,6 @@
     "supertest": "^3.3.0",
     "supervisor": "^0.12.0",
     "typescript": "~3.7.2"
-  }
+  },
+  "snyk": true
 }
