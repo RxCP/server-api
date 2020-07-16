@@ -1,4 +1,4 @@
-import { controller } from '@foal/core';
+import { controller, HttpResponseNotFound, Get } from '@foal/core';
 import { AuthController } from '../plugins/auth/auth.controller';
 
 export class ApiController {

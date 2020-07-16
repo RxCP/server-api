@@ -1,7 +1,10 @@
 {
   "settings": {
     "debug": true,
-    "loggerFormat": "dev"
+    "loggerFormat": "dev",
+    "jwt": {
+      "secretOrPublicKey": "secret"
+    }
   },
   "database": {
     "logging": true

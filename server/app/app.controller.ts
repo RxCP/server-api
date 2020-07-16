@@ -11,8 +11,6 @@ export class AppController {
 
   @Get('*')
   notFound() {
-    return new HttpResponseNotFound({
-      message: 'The page your are looking for does not exist',
-    });
+    return new HttpResponseNotFound('404 - Page Not Found');
   }
 }
