@@ -2,8 +2,8 @@
 <h2 align="center">rAthena server-side API and admin dashboard.</h2>
 <p align="center">The most advanced open-source Control Panel for rAthena servers.</p>
 <p align="center">
-  <a href="https://circleci.com/gh/RxCP/server-admin">
-    <img src="https://circleci.com/gh/RxCP/server-admin.svg?style=svg">
+  <a href="https://circleci.com/gh/RxCP/server-api">
+    <img src="https://circleci.com/gh/RxCP/server-api.svg?style=svg">
   </a>
   <img src="https://img.shields.io/badge/node-%3E%3D8-brightgreen.svg" alt="node version">
   <a href="https://badge.fury.io/js/%40foal%2Fcore">
@@ -12,11 +12,11 @@
   <a href="https://snyk.io/test/npm/@foal/core">
     <img src="https://snyk.io/test/npm/@foal/core/badge.svg" alt="Known Vulnerabilities">
   </a>
-  <a href="https://github.com/RxCP/server-admin/commits/master">
-    <img src="https://img.shields.io/github/commit-activity/y/RxCP/server-admin.svg" alt="Commit activity">
+  <a href="https://github.com/RxCP/server-api/commits/master">
+    <img src="https://img.shields.io/github/commit-activity/y/RxCP/server-api.svg" alt="Commit activity">
   </a>
-  <a href="https://github.com/RxCP/server-admin/commits/master">
-    <img src="https://img.shields.io/github/last-commit/RxCP/server-admin.svg" alt="Last commit">
+  <a href="https://github.com/RxCP/server-api/commits/master">
+    <img src="https://img.shields.io/github/last-commit/RxCP/server-api.svg" alt="Last commit">
   </a>
 </p>
 
