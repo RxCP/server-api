@@ -43,6 +43,8 @@ export class AuthController {
     const newUser: CreateUserDto = {
       email: ctx.request.body.email,
       password: ctx.request.body.password,
+      firstName: ctx.request.body.firstName,
+      lastName: ctx.request.body.lastName,
     };
 
     try {

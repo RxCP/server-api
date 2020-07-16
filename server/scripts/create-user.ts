@@ -8,33 +8,14 @@ import {
 } from 'typeorm';
 
 // App
-// import { User } from '../app/plugins/cms/controllers/';
+import { CreateUserDto } from '../app/plugins/user/dto/userDto';
+import { UserService } from '../app/plugins/user/services/user.service';
+import { createService } from '@foal/core';
+import { validate, validateOrReject } from 'class-validator';
+import { plainToClass } from 'class-transformer';
+import { User } from '../app/plugins/user/entities';
 
-export const schema = {
-  additionalProperties: false,
-  properties: {
-    // email: { type: 'string', format: 'email' },
-    // groups: { type: 'array', items: { type: 'string' }, uniqueItems: true, default: [] },
-    // password: { type: 'string' },
-    // userPermissions: { type: 'array', items: { type: 'string' }, uniqueItems: true, default: [] },
-  },
-  required: [
-    /* 'email', 'password' */
-  ],
-  type: 'object',
-};
-
-export async function main(/*args*/) {
-  // const user = new User();
-  // user.userPermissions = [];
-  // user.groups = [];
-  // user.email = args.email;
-  // if (await isCommon(args.password)) {
-  //   console.log('This password is too common. Please choose another one.');
-  //   return;
-  // }
-  // await user.setPassword(args.password);
-
+export async function main(args: CreateUserDto) {
   await createConnection();
 
   // for (const codeName of args.userPermissions as string[]) {
@@ -57,8 +38,10 @@ export async function main(/*args*/) {
 
   try {
     // console.log(await getManager().save(user));
+    const userService = createService(UserService);
+    await userService.createOne(args);
   } catch (error) {
-    console.log(error.message);
+    console.log(error);
   } finally {
     await getConnection().close();
   }

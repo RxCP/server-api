@@ -21,6 +21,7 @@ export class UserService {
       return Promise.reject(`Email address is already in use`);
     }
 
+    // move this validation into DTO validation
     if (await isCommon(dto.password)) {
       return Promise.reject(
         'This password is too common. Please choose another one.',
@@ -30,6 +31,8 @@ export class UserService {
     try {
       const user = new User();
       user.email = dto.email;
+      user.firstName = dto.firstName;
+      user.lastName = dto.lastName;
       await user.setPassword(dto.password);
 
       const savedUser = await this.repository.save(user);

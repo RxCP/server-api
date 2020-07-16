@@ -12,6 +12,12 @@ export class User {
   @Column()
   password: string;
 
+  @Column()
+  firstName: string;
+
+  @Column()
+  lastName: string;
+
   async setPassword(password: string) {
     this.password = await hashPassword(password);
   }
