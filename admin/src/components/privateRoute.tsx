@@ -13,7 +13,7 @@ function PrivateRoute(props: PrivateRouteProps) {
   
   return(
     <Route {...rest} render={(props) => (
-      authDetails ? 
+      authDetails.authToken ? 
         <Component {...props} />
       : <Redirect to="/admin/login" />
     )}

@@ -1,15 +1,21 @@
 import DashboardPage from '@pages/Dashboard';
 import LoginPage from '@pages/Login';
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/privateRoute';
 import { AuthContext } from './context/auth';
 import PageNotFound from './components/pages/PageNotFound';
 
 function App() {
+  const [authToken, setAuthToken] = useState('');
+
+  const setToken = (token: string) => {
+    setAuthToken(token)
+  }
+
   return (
     <>
-      <AuthContext.Provider value={null}>
+      <AuthContext.Provider value={{ authToken, setAuthToken: setToken }}>
         <Router>
           <Switch>
             <Route path="/admin/login" component={LoginPage} />
