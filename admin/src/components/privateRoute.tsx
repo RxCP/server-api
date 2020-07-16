@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
 
-import { useAuthContext } from '@/context/auth'
+import { useAuthContext } from '@/context/auth';
 
 interface PrivateRouteProps extends RouteProps {
   component: any;
@@ -10,13 +10,18 @@ interface PrivateRouteProps extends RouteProps {
 function PrivateRoute(props: PrivateRouteProps) {
   const { component: Component, ...rest } = props;
   const authDetails = useAuthContext();
-  
-  return(
-    <Route {...rest} render={(props) => (
-      authDetails.authToken ? 
-        <Component {...props} />
-      : <Redirect to="/admin/login" />
-    )}
+  const token = localStorage.getItem('token');
+
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        authDetails.authToken || token ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/admin/login" />
+        )
+      }
     />
   );
 }

@@ -1,17 +1,36 @@
 import DashboardPage from '@pages/Dashboard';
 import LoginPage from '@pages/Login';
-import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PageNotFound from './components/pages/PageNotFound';
 import PrivateRoute from './components/privateRoute';
 import { AuthContext } from './context/auth';
-import PageNotFound from './components/pages/PageNotFound';
 
 function App() {
   const [authToken, setAuthToken] = useState('');
 
   const setToken = (token: string) => {
-    setAuthToken(token)
-  }
+    localStorage.setItem('token', token);
+    setAuthToken(token);
+  };
+
+  useEffect(() => {
+    // check token if still valid, log out if not
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      axios.post('/api/auth/check')
+      .catch(err => {
+        // logout
+        setAuthToken('');
+        localStorage.setItem('token', '');
+        window.location.reload();
+      })
+    }
+  }, [])
 
   return (
     <>

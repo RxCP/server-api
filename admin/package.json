@@ -29,7 +29,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build && del-cli ../public -f && ncp ./build ../public",
-    "test": "craco test"
+    "test": "craco test",
+    "format": "prettier --write \"src/**/*.tsx\" \"src/**/*.ts\""
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,5 +42,8 @@
     "development": [
       "last 4 version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
   }
 }
