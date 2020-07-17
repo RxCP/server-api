@@ -1,5 +1,6 @@
 import { hashPassword } from '@foal/core';
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from '../../../common/entities/BaseEntity';
 
 @Entity()
 export class User extends BaseEntity {
