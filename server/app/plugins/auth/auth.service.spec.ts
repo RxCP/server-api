@@ -1,6 +1,6 @@
 import { createService } from '@foal/core';
-import { AuthService } from './auth.services';
-import { LoginUserDto } from '../user/dto/userDto';
+import { AuthService } from './auth.service';
+import { LoginUserDto } from '../user/user.dto';
 import { User } from '../user/entities';
 import chai = require('chai');
 const should = chai.should();

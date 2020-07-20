@@ -1,11 +1,16 @@
-import DashboardPage from '@pages/Dashboard';
 import LoginPage from '@pages/Login';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import PageNotFound from './components/pages/PageNotFound';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
+import PageNotFound from '@pages/PageNotFound';
 import PrivateRoute from './components/privateRoute';
 import { AuthContext } from './context/auth';
+import Admin from './components/patterns/templates/Admin';
 
 function App() {
   const [authToken, setAuthToken] = useState('');
@@ -38,9 +43,11 @@ function App() {
           <Switch>
             <Route path="/admin/login" component={LoginPage} />
 
-            <PrivateRoute exact path="/" component={DashboardPage} />
-            <PrivateRoute path="/admin" component={DashboardPage} />
-            <PrivateRoute path="/dashboard" component={DashboardPage} />
+            <Route exact path="/">
+              <Redirect to="/admin" />
+            </Route>
+
+            <PrivateRoute path="/admin" component={Admin} />
 
             <Route path="*">
               <PageNotFound />

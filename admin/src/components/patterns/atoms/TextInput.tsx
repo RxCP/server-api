@@ -30,7 +30,7 @@ const TextInput: React.FC<InputProps> = ({
 }) => {
   const finalClass = className
     ? className
-    : 'w-full p-2 border border-gray-600 border-solid outline-none';
+    : 'w-full p-2 border border-gray-600 border-solid outline-none text-sm';
   return (
     <input
       type={type}

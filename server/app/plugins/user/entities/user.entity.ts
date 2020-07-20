@@ -24,7 +24,7 @@ export class User extends BaseEntity {
 
   @Column('varchar', {
     name: 'last_name',
-    length: 32
+    length: 32,
   })
   lastName: string;
 

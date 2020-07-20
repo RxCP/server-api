@@ -18,30 +18,38 @@ async function main() {
 
   const expressApp = express();
 
-  expressApp.use(rateLimit({
-    max: 100, // limit each IP to 100 requests per windowMs
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    handler: function (req, res, next) {
-      // Set default FoalTS headers to the response of limited requests
-      res.removeHeader('X-Powered-By');
-      res.setHeader('X-Content-Type-Options', 'nosniff');
-      res.setHeader('X-DNS-Prefetch-Control', 'off');
-      res.setHeader('X-Download-Options', 'noopen');
-      res.setHeader('X-Frame-Options', 'SAMEORIGIN');
-      res.setHeader('X-XSS-Protection', '1; mode=block');
-      res.setHeader('Strict-Transport-Security', 'max-age=15552000; includeSubDomains');
+  expressApp.use(
+    rateLimit({
+      max: 100, // limit each IP to 100 requests per windowMs
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      handler: function (req, res, next) {
+        // Set default FoalTS headers to the response of limited requests
+        res.removeHeader('X-Powered-By');
+        res.setHeader('X-Content-Type-Options', 'nosniff');
+        res.setHeader('X-DNS-Prefetch-Control', 'off');
+        res.setHeader('X-Download-Options', 'noopen');
+        res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+        res.setHeader('X-XSS-Protection', '1; mode=block');
+        res.setHeader(
+          'Strict-Transport-Security',
+          'max-age=15552000; includeSubDomains',
+        );
 
-      // Set CORS headers
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      if (req.method === 'OPTIONS') {
-        res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        res.setHeader('Access-Control-Allow-Methods', 'HEAD, GET, POST, PUT, PATCH, DELETE');
-      }
+        // Set CORS headers
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        if (req.method === 'OPTIONS') {
+          res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+          res.setHeader(
+            'Access-Control-Allow-Methods',
+            'HEAD, GET, POST, PUT, PATCH, DELETE',
+          );
+        }
 
-      // Send the response with the default statusCode and message from rateLimit
-      res.status(this.statusCode).send(this.message);
-    }
-  }));
+        // Send the response with the default statusCode and message from rateLimit
+        res.status(this.statusCode).send(this.message);
+      },
+    }),
+  );
 
   // const app = createApp(AppController, { expressInstance: AutoloadPlugins() });
   const app = createApp(AppController, expressApp);

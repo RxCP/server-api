@@ -1,9 +1,9 @@
 import { UserService } from './user.service';
 import { createService, Config } from '@foal/core';
-import { CreateUserDto } from '../dto/userDto';
+import { CreateUserDto } from './user.dto';
 import { createConnection, getConnection, getManager } from 'typeorm';
 import chai = require('chai');
-import { User } from '../entities';
+import { User } from './entities';
 const should = chai.should();
 const expect = chai.expect;
 

@@ -8,8 +8,8 @@ import {
 } from 'typeorm';
 
 // App
-import { CreateUserDto } from '../app/plugins/user/dto/userDto';
-import { UserService } from '../app/plugins/user/services/user.service';
+import { CreateUserDto } from '../app/plugins/user/user.dto';
+import { UserService } from '../app/plugins/user/user.service';
 import { createService } from '@foal/core';
 import { validate, validateOrReject } from 'class-validator';
 import { plainToClass } from 'class-transformer';

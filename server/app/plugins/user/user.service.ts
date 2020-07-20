@@ -1,7 +1,6 @@
 import { getRepository } from 'typeorm';
-import { User } from '../entities';
-import { CreateUserDto, UserDto } from '../dto/userDto';
-import { ErrorResponse } from '../../../common/interfaces/responseInterface';
+import { User } from './entities';
+import { CreateUserDto } from './user.dto';
 import { Config } from '@foal/core';
 import { isCommon } from '@foal/password';
 

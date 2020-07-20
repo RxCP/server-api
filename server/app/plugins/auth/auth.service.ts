@@ -1,8 +1,8 @@
-import { LoginUserDto } from '../user/dto/userDto';
+import { LoginUserDto } from '../user/user.dto';
 import { dependency, verifyPassword, Config } from '@foal/core';
-import { UserService } from '../user/services/user.service';
+import { UserService } from '../user/user.service';
 import { sign } from 'jsonwebtoken';
-import { AccessTokenResponse } from '../../common/interfaces/responseInterface';
+import { AccessTokenResponse } from '../../common/interfaces/responseInterfaces';
 
 export class AuthService {
   @dependency

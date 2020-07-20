@@ -6,10 +6,10 @@ import {
   HttpResponseBadRequest,
 } from '@foal/core';
 import { JWTRequired } from '@foal/jwt';
-import { UserService } from '../user/services/user.service';
-import { CreateUserDto, LoginUserDto } from '../user/dto/userDto';
-import { ValidateDto } from '../../common/util/validator.dto';
-import { AuthService } from './auth.services';
+import { UserService } from '../user/user.service';
+import { CreateUserDto, LoginUserDto } from '../user/user.dto';
+import { ValidateDto } from '../../common/hooks/validate-dto.hook';
+import { AuthService } from './auth.service';
 
 export class AuthController {
   @dependency
@@ -59,6 +59,6 @@ export class AuthController {
   @JWTRequired()
   @Post('/check')
   checkToken(ctx: Context) {
-    return new HttpResponseOK({message: 'success'});
+    return new HttpResponseOK({ message: 'success' });
   }
 }

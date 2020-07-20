@@ -1,4 +1,4 @@
-import { Column } from "typeorm";
+import { Column } from 'typeorm';
 
 export class BaseEntity {
   @Column('datetime', { name: 'created_at', nullable: true })

@@ -1,8 +1,8 @@
 import { Class } from '@foal/core';
 import { ValidateBody } from '@foal/typestack';
 
-export function ValidateDto(DTO: Class) {
-  return ValidateBody(DTO, {
+export function ValidateDto(cls: Class) {
+  return ValidateBody(cls, {
     validator: { validationError: { target: false } },
   });
 }

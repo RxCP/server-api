@@ -1,64 +1,97 @@
 import { useAuthContext } from '@/context/auth';
 import TextInput from '@patterns/atoms/TextInput';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router';
+import Button from '../button/Button';
 
 interface IFormValues {
   email: string;
   password: number;
 }
 
-interface ErrorResponse {
+interface ClassValidatorError {
   property: string;
   constraints: object;
 }
 
-function LoginForm() {
-  const history = useHistory();
-  const { register, errors, handleSubmit } = useForm<IFormValues>();
-  const [serverErrors, setServerErrors] = useState<ErrorResponse[]>([]);
-  const authDetails = useAuthContext();
+interface LoginState {
+  loading: boolean;
+  isExitForm: boolean;
+  serverErrors: [];
+}
 
-  const onSubmit = (data: IFormValues) => {
-    axios
-      .post('/api/auth/login', data)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.accessToken) {
-          authDetails.setAuthToken(res.data.accessToken);
-          history.push('/admin');
-        } else {
-          setServerErrors([
-            {
-              property: 'server',
-              constraints: { err: 'Something went wrong!' },
+function loginReducers(
+  state: LoginState,
+  action: { type: string; data?: any },
+) {
+  switch (action.type) {
+    case 'loading':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'loaded':
+      return {
+        ...state,
+        loading: false,
+      };
+    case 'error':
+      if (typeof action.data === 'object' && action.data.length >= 1) {
+        return {
+          ...state,
+          serverErrors: action.data,
+        };
+      }
+
+      return {
+        ...state,
+        serverErrors: [
+          {
+            property: 'all',
+            constraints: {
+              err: action.data.message
+                ? action.data.message
+                : action.data.toString(),
             },
-          ]);
-        }
-      })
-      .catch((err) => {
-        if (err.response.status === 429) {
-          setServerErrors([
-            { property: '429', constraints: { err: err.response.data } },
-          ]);
-        } else {
-          if (err.response.data.message) {
-            setServerErrors([
-              {
-                property: '400',
-                constraints: { err: err.response.data.message },
-              },
-            ]);
-          } else {
-            setServerErrors(err.response.data);
-          }
-        }
-      });
+          },
+        ],
+      };
+    default:
+      throw new Error();
+  }
+}
+
+function LoginForm(props: any) {
+  const { register, errors, handleSubmit } = useForm<IFormValues>();
+  const [shakeOnError, setShakeOnError] = useState(false);
+  const authDetails = useAuthContext();
+  const loginState: LoginState = {
+    loading: false,
+    isExitForm: false,
+    serverErrors: [],
+  };
+  const [state, dispatch] = useReducer(loginReducers, loginState);
+
+  const onSubmit = async (data: IFormValues) => {
+    dispatch({ type: 'loading' });
+
+    try {
+      const accessToken = await axios
+        .post('/api/auth/login', data)
+        .then((res) => res.data.accessToken);
+      if (accessToken) {
+        authDetails.setAuthToken(accessToken);
+        props.onExitForm();
+      }
+    } catch (error) {
+      shake();
+      dispatch({ type: 'error', data: error.response.data });
+      dispatch({ type: 'loaded' });
+    }
   };
 
-  const serverErrorsHtml = (serverErrors: ErrorResponse[]) => (
+  const Errors = (serverErrors: ClassValidatorError[]) => (
     <ul>
       {serverErrors.length >= 1 &&
         serverErrors.map((item) => {
@@ -71,16 +104,29 @@ function LoginForm() {
     </ul>
   );
 
+  function shake() {
+    setShakeOnError(true);
+
+    setTimeout(() => {
+      setShakeOnError(false);
+    }, 1000);
+  }
+
   return (
     <>
       <div className="px-8">
-        {serverErrors.length >= 1 && (
+        {state.serverErrors.length >= 1 && (
           <div className="bg-red-200 py-2 pl-8 pr-2">
-            {serverErrorsHtml(serverErrors)}
+            {Errors(state.serverErrors)}
           </div>
         )}
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="px-8 pt-3 pb-8">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={`px-8 pt-3 pb-8 animate__animated ${
+          shakeOnError ? 'animate__shakeX animate__fast' : ''
+        }`}
+      >
         <div className="mb-4">
           <label>
             <TextInput
@@ -108,12 +154,13 @@ function LoginForm() {
             </span>
           </label>
         </div>
-        <button
+        <Button
           type="submit"
-          className="bg-primary px-4 py-2 text-white w-full cursor-pointer"
-        >
-          Submit
-        </button>
+          text={state.loading ? 'Loading...' : 'Sign In'}
+          full
+          isloading={state.loading}
+          disabled={state.loading}
+        />
       </form>
     </>
   );

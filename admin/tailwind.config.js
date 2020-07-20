@@ -6,21 +6,34 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'sans': ['Roboto Condensed', 'sans-serif'],
-      'heading': ['Eczar', 'serif'],
-      'body': ['Roboto Condensed', 'sans-serif'],
+      'sans': ['Montserrat', 'sans-serif'],
+      'heading': ['Roboto Condensed', 'sans-serif'],
+      'body': ['Montserrat', 'sans-serif'],
     },
     extend: {
+      inset: {
+        '-2/12': '-16.666667%'
+      },
       colors: {
         primary: '#304FFE',
         primaryVariant: '#1A237E',
         secondary: '',
         secondaryVariant: '',
+      },
+      transitionProperty: {
+        left: 'left',
+        right: 'right'
       }
     },
   },
   variants: {
     borderWidth: ['responsive', 'hover', 'focus'],
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-animatecss')({
+      classes: ['animate__animated', 'animate__fast', 'animate__fadeInDown', 'animate__fadeOutUp', 'animate__fadeOut', 'animate__shakeX'],
+      settings: {},
+      variants: ['responsive', 'hover', 'reduced-motion'],
+    }),
+  ],
 }
