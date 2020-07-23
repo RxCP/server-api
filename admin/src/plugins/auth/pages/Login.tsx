@@ -1,4 +1,4 @@
-import LoginForm from '@patterns/molecules/forms/loginForm';
+import LoginForm from '@plugins/auth/components/LoginForm';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 

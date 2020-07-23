@@ -1,9 +1,9 @@
-import { useAuthContext } from '@/context/auth';
+import { useAuthContext } from '@core/context/auth';
 import TextInput from '@patterns/atoms/TextInput';
 import axios from 'axios';
 import React, { useReducer, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Button from '../button/Button';
+import Button from '@patterns/molecules/button/Button';
 
 interface IFormValues {
   email: string;

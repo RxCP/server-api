@@ -1,5 +1,5 @@
 import React from 'react';
-import Heading from '@/components/patterns/atoms/Heading';
+import Heading from '@patterns/atoms/Heading';
 
 function StyleguidePage() {
   return (
