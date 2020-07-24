@@ -1,27 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import OffCanvas from './Offcanvas';
 
 function Header() {
-  const [userPanelIsOpen, setUserPanelIsOpen] = useState(false);
+  const [userPanelIsOpen, setUserPanelIsOpen] = useState<boolean>(false);
 
-  function handleBodyClick(e: any) {
+  function handleUserProfileClick(e: any) {
     e.preventDefault();
     setUserPanelIsOpen(!userPanelIsOpen);
   }
-
-  function onBodyClick() {
-    if (document.body.classList.contains('offcanvas-open')) {
-      setUserPanelIsOpen(false);
-    }
-  }
-
-  useEffect(() => {
-    document.body.addEventListener('click', onBodyClick);
-
-    return () => {
-      document.body.removeEventListener('click', onBodyClick);
-    };
-  }, []);
 
   return (
     <>
@@ -36,7 +22,7 @@ function Header() {
             data-dropdown
             className="flex items-center px-3 py-2 focus:outline-none hover:bg-gray-200 hover:rounded-md"
             type="button"
-            onClick={handleBodyClick}
+            onClick={handleUserProfileClick}
           >
             <img
               src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=100&h=100&q=80"
@@ -54,7 +40,11 @@ function Header() {
         </div>
       </div>
 
-      <OffCanvas position="right" open={userPanelIsOpen}></OffCanvas>
+      <OffCanvas
+        position="right"
+        openState={userPanelIsOpen}
+        setOpenState={setUserPanelIsOpen}
+      ></OffCanvas>
     </>
   );
 }
