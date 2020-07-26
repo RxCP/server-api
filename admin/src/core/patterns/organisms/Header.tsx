@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import OffCanvas from './Offcanvas';
+import SlidePanel from './SlidePanel';
 
 function Header() {
   const [userPanelIsOpen, setUserPanelIsOpen] = useState<boolean>(false);
@@ -40,11 +40,11 @@ function Header() {
         </div>
       </div>
 
-      <OffCanvas
-        position="right"
+      <SlidePanel
+        position="left"
         openState={userPanelIsOpen}
         setOpenState={setUserPanelIsOpen}
-      ></OffCanvas>
+      ></SlidePanel>
     </>
   );
 }

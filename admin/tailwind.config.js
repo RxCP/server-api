@@ -12,7 +12,7 @@ module.exports = {
     },
     extend: {
       inset: {
-        '-2/12': '-16.666667%'
+        '-1/6': '-16.666667%',
       },
       colors: {
         primary: '#304FFE',
