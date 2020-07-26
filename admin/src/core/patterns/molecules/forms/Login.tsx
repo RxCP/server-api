@@ -1,9 +1,9 @@
-import { useAuthContext } from '@core/context/auth';
-import TextInput from '@patterns/atoms/TextInput';
 import axios from 'axios';
 import React, { useReducer, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Button from '@patterns/molecules/button/Button';
+import { useAuthContext } from '../../../context/auth';
+import TextInput from '../../atoms/TextInput';
+import Button from '../button/Button';
 
 interface IFormValues {
   email: string;
@@ -62,7 +62,11 @@ function loginReducers(
   }
 }
 
-function LoginForm(props: any) {
+interface LoginFormProps {
+  onSuccess: () => void;
+}
+
+function LoginForm({ onSuccess }: LoginFormProps) {
   const { register, errors, handleSubmit } = useForm<IFormValues>();
   const [shakeOnError, setShakeOnError] = useState(false);
   const authDetails = useAuthContext();
@@ -82,11 +86,11 @@ function LoginForm(props: any) {
         .then((res) => res.data.accessToken);
       if (accessToken) {
         authDetails.setAuthToken(accessToken);
-        props.onExitForm();
+        onSuccess();
       }
     } catch (error) {
       shake();
-      dispatch({ type: 'error', data: error.response.data });
+      dispatch({ type: 'error', data: error.response.data || error.response });
       dispatch({ type: 'loaded' });
     }
   };

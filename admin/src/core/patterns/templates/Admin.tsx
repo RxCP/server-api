@@ -1,10 +1,10 @@
-import RoutesInterface from '../../interfaces/routes';
-import React from 'react';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Footer from '@patterns/organisms/Footer';
 import Header from '@patterns/organisms/Header';
 import MainContent from '@patterns/organisms/MainContent';
 import SideBar from '@patterns/organisms/Sidebar';
+import React from 'react';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import RoutesInterface from '../../interfaces/routes';
 
 interface AdminProps {
   routes: RoutesInterface[];

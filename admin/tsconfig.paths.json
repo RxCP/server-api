@@ -5,7 +5,8 @@
         "@patterns/*": ["core/patterns/*"],
         "@core/*": ["core/*"],
         "@pages/*": ["pages/*"],
-        "@plugins/*": ["plugins/*"]
+        "@plugins/*": ["plugins/*"],
+        "@common/*": ["common/*"]
      }
   }
 }

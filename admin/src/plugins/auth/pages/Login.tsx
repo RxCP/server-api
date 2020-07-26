@@ -1,4 +1,5 @@
-import LoginForm from '@plugins/auth/components/LoginForm';
+import Logo from '@common/components/Logo';
+import LoginForm from '@core/patterns/molecules/forms/Login';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -7,7 +8,7 @@ function LoginPage() {
   const [isExitForm, setIsExitForm] = useState(false);
   const [exitPage, setExitPage] = useState(false);
 
-  function onExitForm() {
+  function onSuccess() {
     setIsExitForm(true);
 
     setTimeout(() => {
@@ -32,10 +33,8 @@ function LoginPage() {
               isExitForm ? 'animate__fadeOutUp' : ''
             }`}
           >
-            <h1 className="text-center text-3xl font-heading font-semibold">
-              RxCP
-            </h1>
-            <LoginForm onExitForm={onExitForm} />
+            <Logo />
+            <LoginForm onSuccess={onSuccess} />
           </div>
         </div>
       </div>
