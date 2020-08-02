@@ -30,10 +30,17 @@
     "format": "prettier --write \"server/**/*.ts\"",
     "init:env": "cp .env.example .env",
     "snyk-protect": "snyk protect",
-    "prepare": "yarn run snyk-protect"
+    "prepare": "yarn run snyk-protect",
+    "precommit": "lint-staged"
   },
   "engines": {
     "node": ">=8"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css,ts,tsx}": [
+      "prettier --single-quote --write",
+      "git add"
+    ]
   },
   "dependencies": {
     "@foal/core": "^1.0.0",
@@ -59,13 +66,15 @@
     "@types/supertest": "^2.0.10",
     "@typescript-eslint/eslint-plugin": "~2.7.0",
     "@typescript-eslint/parser": "~2.7.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "chai": "^4.2.0",
     "class-transformer": "^0.2.3",
     "concurrently": "^3.5.1",
     "copy": "^0.3.2",
     "eslint": "^6.6.0",
     "mocha": "^5.2.0",
-    "prettier": "2.0.5",
+    "prettier": "^2.0.5",
     "sqlite3": "^5.0.0",
     "supertest": "^3.3.0",
     "supervisor": "^0.12.0",
