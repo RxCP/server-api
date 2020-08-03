@@ -1,11 +1,26 @@
+import { Config } from '@foal/core';
+import { isCommon } from '@foal/password';
 import { getRepository } from 'typeorm';
 import { User } from './entities';
 import { CreateUserDto } from './user.dto';
-import { Config } from '@foal/core';
-import { isCommon } from '@foal/password';
 
 export class UserService {
   repository = getRepository(User);
+
+  async findAll(query: { take: number; skip: number }): Promise<{}> {
+    const take = query.take || 10;
+    const skip = query.skip || 0;
+
+    const [result, total] = await this.repository.findAndCount({
+      take: take,
+      skip: skip,
+    });
+
+    return {
+      data: result,
+      count: total,
+    };
+  }
 
   async findByEmail(userEmail: string): Promise<User | undefined> {
     return this.repository.findOne({ email: userEmail });
