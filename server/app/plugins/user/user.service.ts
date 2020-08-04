@@ -22,8 +22,12 @@ export class UserService {
     };
   }
 
+  async findById(userId: number): Promise<User | undefined> {
+    return await this.repository.findOne(userId);
+  }
+
   async findByEmail(userEmail: string): Promise<User | undefined> {
-    return this.repository.findOne({ email: userEmail });
+    return await this.repository.findOne({ email: userEmail });
   }
 
   async createOne(dto: CreateUserDto): Promise<User | string> {
