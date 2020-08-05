@@ -5,6 +5,7 @@ import {
   HttpResponseBadRequest,
   HttpResponseOK,
   Post,
+  Delete,
 } from '@foal/core';
 import { ValidateDto } from '../../common/hooks/validate-dto.hook';
 import { CreateUserDto } from './user.dto';
@@ -52,6 +53,19 @@ export class UserController {
       return new HttpResponseOK({ message: 'Registered!' });
     } catch (message) {
       return new HttpResponseBadRequest({ message });
+    }
+  }
+
+  @Delete('/:id')
+  async deleteOne(ctx: Context) {
+    const userId = ctx.request.params.id;
+
+    try {
+      await this.userService.archiveById(userId);
+
+      return new HttpResponseOK({ message: 'Deleted successfully' });
+    } catch (error) {
+      return new HttpResponseBadRequest({ error });
     }
   }
 }

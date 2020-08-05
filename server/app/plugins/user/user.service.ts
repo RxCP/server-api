@@ -30,6 +30,14 @@ export class UserService {
     return await this.repository.findOne({ email: userEmail });
   }
 
+  async archiveById(userId: number) {
+    return await this.repository.softDelete(userId);
+  }
+
+  async restoreById(userId: number) {
+    return await this.repository.restore(userId);
+  }
+
   async createOne(dto: CreateUserDto): Promise<User | string> {
     const countEmail = await this.repository.count({
       where: { email: dto.email },
