@@ -3,6 +3,11 @@ import { ValidateBody } from '@foal/typestack';
 
 export function ValidateDto(cls: Class) {
   return ValidateBody(cls, {
-    validator: { validationError: { target: false } },
+    validator: {
+      whitelist: true,
+      skipMissingProperties: true,
+      forbidUnknownValues: true,
+      validationError: { target: false },
+    },
   });
 }

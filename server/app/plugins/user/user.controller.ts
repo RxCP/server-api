@@ -4,7 +4,10 @@ import {
   Get,
   HttpResponseBadRequest,
   HttpResponseOK,
+  Post,
 } from '@foal/core';
+import { ValidateDto } from '../../common/hooks/validate-dto.hook';
+import { CreateUserDto } from './user.dto';
 import { UserService } from './user.service';
 
 export class UserController {
@@ -37,6 +40,18 @@ export class UserController {
       return new HttpResponseOK(res);
     } catch (error) {
       return new HttpResponseBadRequest({ error });
+    }
+  }
+
+  @Post('/')
+  @ValidateDto(CreateUserDto)
+  async createOne(ctx: Context) {
+    const newUser: CreateUserDto = ctx.request.body;
+    try {
+      await this.userService.createOne(newUser);
+      return new HttpResponseOK({ message: 'Registered!' });
+    } catch (message) {
+      return new HttpResponseBadRequest({ message });
     }
   }
 }

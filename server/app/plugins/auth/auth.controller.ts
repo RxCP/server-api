@@ -1,14 +1,14 @@
 import {
   Context,
   dependency,
+  HttpResponseBadRequest,
   HttpResponseOK,
   Post,
-  HttpResponseBadRequest,
 } from '@foal/core';
 import { JWTRequired } from '@foal/jwt';
-import { UserService } from '../user/user.service';
-import { CreateUserDto, LoginUserDto } from '../user/user.dto';
 import { ValidateDto } from '../../common/hooks/validate-dto.hook';
+import { CreateUserDto, LoginUserDto } from '../user/user.dto';
+import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 
 export class AuthController {
@@ -41,12 +41,7 @@ export class AuthController {
   async register(
     ctx: Context,
   ): Promise<HttpResponseOK | HttpResponseBadRequest> {
-    const newUser: CreateUserDto = {
-      email: ctx.request.body.email,
-      password: ctx.request.body.password,
-      firstName: ctx.request.body.firstName,
-      lastName: ctx.request.body.lastName,
-    };
+    const newUser: CreateUserDto = ctx.request.body;
 
     try {
       await this.userService.createOne(newUser);

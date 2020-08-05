@@ -24,6 +24,9 @@ describe('UserController', () => {
     findById(id: number) {
       return users.find((u) => u.id === id);
     },
+    createOne(usersDto: {}) {
+      return usersDto;
+    },
   };
 
   const controller = createController(UserController, {
@@ -32,7 +35,7 @@ describe('UserController', () => {
 
   beforeEach(() => []);
 
-  describe('/users', () => {
+  describe('GET /users', () => {
     it('should return all users', async () => {
       const ctx = new Context({});
 
@@ -46,8 +49,8 @@ describe('UserController', () => {
     });
   });
 
-  describe('/users/:id', () => {
-    it('should return 1 user', async () => {
+  describe('GET /users/:id', () => {
+    it('should return user info', async () => {
       const ctx = new Context({
         params: {
           id: 1,
@@ -61,6 +64,30 @@ describe('UserController', () => {
       }
 
       assert.deepEqual(response.body, userServiceMock.findById(1));
+    });
+  });
+
+  describe('POST /users', () => {
+    const newUser = {
+      email: 'johngerome@test.com',
+      password: 'killmeall',
+      firstName: 'john',
+      lastName: 'smith',
+      thishouldbeignored: 'thishouldbeignored',
+    };
+
+    it('should create one user and display success message', async () => {
+      const ctx = new Context({
+        body: newUser,
+      });
+
+      const response = await controller.createOne(ctx);
+
+      if (!isHttpResponseOK(response)) {
+        throw new Error('The response should be an HttpResponseOK');
+      }
+
+      assert.deepEqual(response.body, { message: 'Registered!' });
     });
   });
 });
