@@ -1,12 +1,12 @@
 import { CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
 export class BaseEntity {
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'datetime' })
   createdAt: Date | null;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'datetime' })
   updaatedAt: Date | null;
 
-  @DeleteDateColumn({ type: 'timestamp' })
-  deleteDate: Date;
+  @DeleteDateColumn({ type: 'datetime' })
+  deleteDate: Date | null;
 }
