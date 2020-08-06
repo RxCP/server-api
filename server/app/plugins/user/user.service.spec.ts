@@ -55,4 +55,22 @@ describe('UserService', () => {
       }
     });
   });
+
+  describe('archiveById()', () => {
+    it('should archive one user by id', async () => {
+      const res = await service.archiveById(1);
+      if (res) {
+        res.should.be.an('object');
+      }
+    });
+  });
+
+  describe('restoreById()', () => {
+    it('should restore one user by id', async () => {
+      const res = await service.restoreById(1);
+      if (res) {
+        res.should.be.an('object');
+      }
+    });
+  });
 });
