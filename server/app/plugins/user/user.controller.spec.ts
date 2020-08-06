@@ -27,6 +27,9 @@ describe('UserController', () => {
     createOne(usersDto: {}) {
       return usersDto;
     },
+    updateOne(usersDto: {}) {
+      return usersDto;
+    }
   };
 
   const controller = createController(UserController, {
@@ -88,6 +91,30 @@ describe('UserController', () => {
       }
 
       assert.deepEqual(response.body, { message: 'Registered!' });
+    });
+  });
+
+  describe('PATCH /users', () => {
+    const patch = {
+      email: 'johngerome@test.com',
+      password: 'killmeall',
+      firstName: 'john fuzz',
+      lastName: 'buzz',
+      thishouldbeignored: 'thishouldbeignored',
+    };
+
+    it('should update one user and display success message', async () => {
+      const ctx = new Context({
+        body: patch,
+      });
+
+      const response = await controller.updateOne(ctx);
+
+      if (!isHttpResponseOK(response)) {
+        throw new Error('The response should be an HttpResponseOK');
+      }
+
+      assert.deepEqual(response.body, { message: 'Updated!' });
     });
   });
 });
