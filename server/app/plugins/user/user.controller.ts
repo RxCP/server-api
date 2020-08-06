@@ -6,9 +6,10 @@ import {
   HttpResponseOK,
   Post,
   Delete,
+  Patch,
 } from '@foal/core';
 import { ValidateDto } from '../../common/hooks/validate-dto.hook';
-import { CreateUserDto } from './user.dto';
+import { CreateUserDto, UpdateUserDto } from './user.dto';
 import { UserService } from './user.service';
 
 export class UserController {
@@ -51,6 +52,17 @@ export class UserController {
     try {
       await this.userService.createOne(newUser);
       return new HttpResponseOK({ message: 'Registered!' });
+    } catch (message) {
+      return new HttpResponseBadRequest({ message });
+    }
+  }
+
+  @Patch('/')
+  @ValidateDto(UpdateUserDto)
+  async updateOne(ctx: Context) {
+    try {
+      await this.userService.updateOne(ctx.request.body);
+      return new HttpResponseOK({ message: 'Updated!' });
     } catch (message) {
       return new HttpResponseBadRequest({ message });
     }

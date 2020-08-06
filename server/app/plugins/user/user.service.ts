@@ -1,8 +1,8 @@
-import { Config } from '@foal/core';
+import { Config, verifyPassword } from '@foal/core';
 import { isCommon } from '@foal/password';
-import { getRepository } from 'typeorm';
+import { getRepository, UpdateResult } from 'typeorm';
 import { User } from './entities';
-import { CreateUserDto } from './user.dto';
+import { CreateUserDto, UpdateUserDto } from './user.dto';
 
 export class UserService {
   repository = getRepository(User);
@@ -63,6 +63,40 @@ export class UserService {
 
       const savedUser = await this.repository.save(user);
       return Promise.resolve(savedUser);
+    } catch (error) {
+      const errorMsg = Config.get2('settings.debug', 'boolean')
+        ? error.message
+        : 'Something went wrong!';
+      return Promise.reject(errorMsg);
+    }
+  }
+
+  async updateOne(dto: UpdateUserDto): Promise<UpdateResult | string> {
+    const user = await this.findByEmail(dto.email);
+
+    if (!user) {
+      return Promise.reject('User not found');
+    }
+
+    // check the password as well
+    const userPass = await this.repository.findOne(user.id, {
+      select: ['password'],
+    });
+
+    if (
+      userPass &&
+      userPass.password &&
+      !(await verifyPassword(dto.password, userPass.password))
+    ) {
+      return Promise.reject('Invalid email or password');
+    }
+
+    try {
+      // don't update the password and email
+      delete dto.password;
+      delete dto.email;
+      const res = await this.repository.update(user.id, dto);
+      return Promise.resolve(res);
     } catch (error) {
       const errorMsg = Config.get2('settings.debug', 'boolean')
         ? error.message
