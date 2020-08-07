@@ -56,9 +56,11 @@ export class UserService {
 
     try {
       const user = new User();
-      user.email = dto.email;
-      user.firstName = dto.firstName;
-      user.lastName = dto.lastName;
+
+      for (const item in dto) {
+        user[item] = dto[item];
+      }
+
       await user.setPassword(dto.password);
 
       const savedUser = await this.repository.save(user);
@@ -93,9 +95,10 @@ export class UserService {
 
     try {
       // don't update the password and email
-      delete dto.password;
-      delete dto.email;
-      const res = await this.repository.update(user.id, dto);
+      const newDto = Object.assign({}, dto);
+      delete newDto.password;
+      delete newDto.email;
+      const res = await this.repository.update(user.id, newDto);
       return Promise.resolve(res);
     } catch (error) {
       const errorMsg = Config.get2('settings.debug', 'boolean')

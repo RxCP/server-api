@@ -29,7 +29,7 @@ describe('UserController', () => {
     },
     updateOne(usersDto: {}) {
       return usersDto;
-    }
+    },
   };
 
   const controller = createController(UserController, {

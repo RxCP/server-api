@@ -1,14 +1,15 @@
 import { UserService } from './user.service';
 import { createService, Config } from '@foal/core';
-import { CreateUserDto } from './user.dto';
-import { createConnection, getConnection, getManager } from 'typeorm';
+import { CreateUserDto, UpdateUserDto } from './user.dto';
+import { createConnection, getConnection } from 'typeorm';
 import chai = require('chai');
 import { User } from './entities';
+import { strictEqual } from 'assert';
 const should = chai.should();
 const expect = chai.expect;
 
 describe('UserService', () => {
-  let user: CreateUserDto, service: UserService, connection;
+  let user: CreateUserDto, service: UserService;
 
   before(async () => {
     await createConnection({
@@ -70,6 +71,31 @@ describe('UserService', () => {
       const res = await service.restoreById(1);
       if (res) {
         res.should.be.an('object');
+      }
+    });
+  });
+
+  describe('updateOne()', () => {
+    it('should update one user base from DTO', async () => {
+      const res = await service.updateOne(user);
+      if (res) {
+        res.should.be.an('object');
+      }
+    });
+
+    it('should be able to update firstName only', async () => {
+      const updateUSer: UpdateUserDto = {
+        email: 'test@test.com',
+        password: 'mapletree',
+        firstName: 'john 2',
+      };
+
+      await service.updateOne(updateUSer);
+
+      const res = await service.findByEmail(updateUSer.email);
+
+      if (res) {
+        strictEqual(res.firstName, updateUSer.firstName);
       }
     });
   });

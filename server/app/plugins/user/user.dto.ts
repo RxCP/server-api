@@ -28,22 +28,22 @@ export class CreateUserDto extends UserDto {
   @IsString()
   @MinLength(1)
   @MaxLength(20)
-  firstName: string;
+  firstName?: string;
 
   @IsDefined()
   @IsNotEmpty()
   @IsString()
   @MinLength(1)
   @MaxLength(20)
-  lastName: string;
+  lastName?: string;
 }
 
 export class UpdateUserDto extends CreateUserDto {
   @IsOptional()
-  firstName: string;
+  firstName?: string;
 
   @IsOptional()
-  lastName: string;
+  lastName?: string;
 }
 
 export class LoginUserDto extends UserDto {}
