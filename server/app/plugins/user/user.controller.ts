@@ -57,11 +57,13 @@ export class UserController {
     }
   }
 
-  @Patch('/')
+  @Patch('/:id')
   @ValidateDto(UpdateUserDto)
   async updateOne(ctx: Context) {
+    const userId = ctx.request.params.id;
+
     try {
-      await this.userService.updateOne(ctx.request.body);
+      await this.userService.updateOne(userId, ctx.request.body);
       return new HttpResponseOK({ message: 'Updated!' });
     } catch (message) {
       return new HttpResponseBadRequest({ message });

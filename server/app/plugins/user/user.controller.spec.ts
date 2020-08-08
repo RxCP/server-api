@@ -105,6 +105,9 @@ describe('UserController', () => {
 
     it('should update one user and display success message', async () => {
       const ctx = new Context({
+        params: {
+          id: 1,
+        },
         body: patch,
       });
 

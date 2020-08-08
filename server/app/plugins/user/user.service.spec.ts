@@ -77,7 +77,7 @@ describe('UserService', () => {
 
   describe('updateOne()', () => {
     it('should update one user base from DTO', async () => {
-      const res = await service.updateOne(user);
+      const res = await service.updateOne(1, user);
       if (res) {
         res.should.be.an('object');
       }
@@ -90,7 +90,7 @@ describe('UserService', () => {
         firstName: 'john 2',
       };
 
-      await service.updateOne(updateUSer);
+      await service.updateOne(1, updateUSer);
 
       const res = await service.findByEmail(updateUSer.email);
 

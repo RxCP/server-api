@@ -63,8 +63,7 @@ export class UserService {
 
       await user.setPassword(dto.password);
 
-      const savedUser = await this.repository.save(user);
-      return Promise.resolve(savedUser);
+      return await this.repository.save(user);
     } catch (error) {
       const errorMsg = Config.get2('settings.debug', 'boolean')
         ? error.message
@@ -73,24 +72,11 @@ export class UserService {
     }
   }
 
-  async updateOne(dto: UpdateUserDto): Promise<UpdateResult | string> {
-    const user = await this.findByEmail(dto.email);
+  async updateOne(userId: number, dto: UpdateUserDto): Promise<UpdateResult | string> {
+    const user = await this.findById(userId);
 
     if (!user) {
       return Promise.reject('User not found');
-    }
-
-    // check the password as well
-    const userPass = await this.repository.findOne(user.id, {
-      select: ['password'],
-    });
-
-    if (
-      userPass &&
-      userPass.password &&
-      !(await verifyPassword(dto.password, userPass.password))
-    ) {
-      return Promise.reject('Invalid email or password');
     }
 
     try {
@@ -98,8 +84,8 @@ export class UserService {
       const newDto = Object.assign({}, dto);
       delete newDto.password;
       delete newDto.email;
-      const res = await this.repository.update(user.id, newDto);
-      return Promise.resolve(res);
+      
+      return await this.repository.update(user.id, newDto);
     } catch (error) {
       const errorMsg = Config.get2('settings.debug', 'boolean')
         ? error.message
