@@ -72,7 +72,10 @@ export class UserService {
     }
   }
 
-  async updateOne(userId: number, dto: UpdateUserDto): Promise<UpdateResult | string> {
+  async updateOne(
+    userId: number,
+    dto: UpdateUserDto,
+  ): Promise<UpdateResult | string> {
     const user = await this.findById(userId);
 
     if (!user) {
@@ -84,7 +87,7 @@ export class UserService {
       const newDto = Object.assign({}, dto);
       delete newDto.password;
       delete newDto.email;
-      
+
       return await this.repository.update(user.id, newDto);
     } catch (error) {
       const errorMsg = Config.get2('settings.debug', 'boolean')
