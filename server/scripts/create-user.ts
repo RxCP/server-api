@@ -4,16 +4,16 @@
 import {
   createConnection,
   getConnection,
-  getManager /*getRepository*/,
+  // getManager /*getRepository*/,
 } from 'typeorm';
 
 // App
 import { CreateUserDto } from '../app/plugins/user/user.dto';
 import { UserService } from '../app/plugins/user/user.service';
 import { createService } from '@foal/core';
-import { validate, validateOrReject } from 'class-validator';
-import { plainToClass } from 'class-transformer';
-import { User } from '../app/plugins/user/entities';
+// import { validate, validateOrReject } from 'class-validator';
+// import { plainToClass } from 'class-transformer';
+// import { User } from '../app/plugins/user/entities';
 
 export async function main(args: CreateUserDto) {
   await createConnection();

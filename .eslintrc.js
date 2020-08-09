@@ -43,6 +43,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off'
   },
   ignorePatterns: [
-    'src/migrations/*.ts'
+    'server/migrations/*.ts'
   ]
 };

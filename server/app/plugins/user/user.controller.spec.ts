@@ -22,7 +22,7 @@ describe('UserController', () => {
       };
     },
     findById(id: number) {
-      return users.find((u) => u.id === id);
+      return users.find(u => u.id === id);
     },
     createOne(usersDto: {}) {
       return usersDto;

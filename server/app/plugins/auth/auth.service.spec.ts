@@ -2,8 +2,8 @@ import { createService } from '@foal/core';
 import { AuthService } from './auth.service';
 import { LoginUserDto } from '../user/user.dto';
 import { User } from '../user/entities';
-import chai = require('chai');
-const should = chai.should();
+// import chai = require('chai');
+// const should = chai.should();
 
 describe('AuthService', () => {
   let user, UserServiceMock, service;

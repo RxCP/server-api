@@ -1,4 +1,4 @@
-import { Config, verifyPassword } from '@foal/core';
+import { Config } from '@foal/core';
 import { isCommon } from '@foal/password';
 import { getRepository, UpdateResult, FindOneOptions } from 'typeorm';
 import { User } from './entities';
@@ -47,7 +47,7 @@ export class UserService {
     });
 
     if (countEmail) {
-      return Promise.reject(`Email address is already in use`);
+      return Promise.reject('Email address is already in use');
     }
 
     // move this validation into DTO validation
