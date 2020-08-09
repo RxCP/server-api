@@ -1,16 +1,23 @@
 // 3p
-import { createApp } from '@foal/core';
+import { createApp, Config } from '@foal/core';
 import request from 'supertest';
 import { createConnection, getConnection } from 'typeorm';
 
 // App
 import { AppController } from '../app/app.controller';
+import { User } from '../app/plugins/user/entities';
 
 describe('The server', () => {
   let app;
 
   before(async () => {
-    await createConnection();
+    await createConnection({
+      type: 'sqlite',
+      entities: [User],
+      database: Config.get2('database.database'),
+      dropSchema: Config.get2('database.dropSchema'),
+      synchronize: Config.get2('database.synchronize'),
+    });
     app = createApp(AppController);
   });
 

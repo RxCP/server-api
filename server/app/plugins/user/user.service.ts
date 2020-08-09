@@ -1,6 +1,6 @@
 import { Config, verifyPassword } from '@foal/core';
 import { isCommon } from '@foal/password';
-import { getRepository, UpdateResult } from 'typeorm';
+import { getRepository, UpdateResult, FindOneOptions } from 'typeorm';
 import { User } from './entities';
 import { CreateUserDto, UpdateUserDto } from './user.dto';
 
@@ -26,8 +26,8 @@ export class UserService {
     return await this.repository.findOne(userId);
   }
 
-  async findByEmail(userEmail: string): Promise<User | undefined> {
-    return await this.repository.findOne({ email: userEmail });
+  async findByEmail(userEmail: string, options?: FindOneOptions<User>): Promise<User | undefined> {
+    return await this.repository.findOne({ email: userEmail }, options);
   }
 
   async archiveById(userId: number) {

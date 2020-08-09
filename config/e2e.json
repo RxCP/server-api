@@ -1,5 +1,6 @@
 {
   "settings": {
+    "debug": true,
     "loggerFormat": "none"
   },
   "database": {

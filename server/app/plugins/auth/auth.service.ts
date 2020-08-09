@@ -11,7 +11,7 @@ export class AuthService {
   async loginUser(
     loginUserDto: LoginUserDto,
   ): Promise<AccessTokenResponse | string> {
-    const user = await this.userService.findByEmail(loginUserDto.email);
+    const user = await this.userService.findByEmail(loginUserDto.email, { select: ['password'] });
 
     if (
       !user ||

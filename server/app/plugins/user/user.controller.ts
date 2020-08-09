@@ -11,6 +11,7 @@ import {
 import { ValidateDto } from '../../common/hooks/validate-dto.hook';
 import { CreateUserDto, UpdateUserDto } from './user.dto';
 import { UserService } from './user.service';
+import { JWTRequired } from '@foal/jwt';
 
 export class UserController {
   @dependency
@@ -46,6 +47,7 @@ export class UserController {
   }
 
   @Post('/')
+  @JWTRequired()
   @ValidateDto(CreateUserDto)
   async createOne(ctx: Context) {
     const newUser: CreateUserDto = ctx.request.body;
@@ -58,6 +60,7 @@ export class UserController {
   }
 
   @Patch('/:id')
+  @JWTRequired()
   @ValidateDto(UpdateUserDto)
   async updateOne(ctx: Context) {
     const userId = ctx.request.params.id;
@@ -71,6 +74,7 @@ export class UserController {
   }
 
   @Delete('/:id')
+  @JWTRequired()
   async deleteOne(ctx: Context) {
     const userId = ctx.request.params.id;
 
