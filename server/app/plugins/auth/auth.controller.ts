@@ -21,13 +21,8 @@ export class AuthController {
   @Post('/login')
   @ValidateDto(LoginUserDto)
   async login(ctx: Context) {
-    const userToLogin: LoginUserDto = {
-      email: ctx.request.body.email,
-      password: ctx.request.body.password,
-    };
-
     try {
-      const authToken = await this.authService.loginUser(userToLogin);
+      const authToken = await this.authService.loginUser(ctx.request.body);
       return new HttpResponseOK(authToken);
     } catch (message) {
       return new HttpResponseBadRequest({
@@ -41,10 +36,8 @@ export class AuthController {
   async register(
     ctx: Context,
   ): Promise<HttpResponseOK | HttpResponseBadRequest> {
-    const newUser: CreateUserDto = ctx.request.body;
-
     try {
-      await this.userService.createOne(newUser);
+      await this.userService.createOne(ctx.request.body);
       return new HttpResponseOK({ message: 'Registered!' });
     } catch (message) {
       return new HttpResponseBadRequest({ message });

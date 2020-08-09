@@ -17,22 +17,22 @@ describe('/api/users', () => {
       dropSchema: Config.get2('database.dropSchema'),
       synchronize: Config.get2('database.synchronize'),
     });
-    
+
     app = createApp(AppController);
 
     await request(app).post('/api/auth/register').send({
       email: 'johngerome@test.com',
       password: 'xhj17jsh',
       firstName: 'john',
-      lastName: 'smith'
-    })
+      lastName: 'smith',
+    });
 
     const res = await request(app).post('/api/auth/login').send({
       email: 'johngerome@test.com',
       password: 'xhj17jsh',
-    })
+    });
 
-    accessToken = res.body.accessToken
+    accessToken = res.body.accessToken;
   });
 
   after(() => getConnection().close());
@@ -71,6 +71,9 @@ describe('/api/users', () => {
   });
 
   it('should return a 200 status on DELETE /api/users/:d requests.', () => {
-    return request(app).delete('/api/users/1').auth(accessToken, { type: 'bearer' }).expect(200);
+    return request(app)
+      .delete('/api/users/1')
+      .auth(accessToken, { type: 'bearer' })
+      .expect(200);
   });
 });

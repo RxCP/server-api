@@ -26,7 +26,10 @@ export class UserService {
     return await this.repository.findOne(userId);
   }
 
-  async findByEmail(userEmail: string, options?: FindOneOptions<User>): Promise<User | undefined> {
+  async findByEmail(
+    userEmail: string,
+    options?: FindOneOptions<User>,
+  ): Promise<User | undefined> {
     return await this.repository.findOne({ email: userEmail }, options);
   }
 
