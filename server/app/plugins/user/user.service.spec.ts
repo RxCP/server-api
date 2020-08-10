@@ -2,10 +2,10 @@ import { UserService } from './user.service';
 import { createService, Config } from '@foal/core';
 import { CreateUserDto, UpdateUserDto } from './user.dto';
 import { createConnection, getConnection } from 'typeorm';
-// import chai = require('chai');
+import chai = require('chai');
 import { User } from './entities';
 import { strictEqual } from 'assert';
-// const should = chai.should();
+const should = chai.should(); // eslint-disable-line
 const expect = chai.expect;
 
 describe('UserService', () => {
