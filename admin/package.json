@@ -15,7 +15,7 @@
     "@types/react-helmet": "^6.0.0",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-transition-group": "^4.4.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "craco-alias": "^2.1.1",
     "del-cli": "^3.0.1",
     "ncp": "^2.0.0",
