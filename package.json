@@ -54,7 +54,7 @@
     "mysql2": "^2.1.0",
     "snyk": "^1.362.0",
     "source-map-support": "^0.5.1",
-    "typeorm": "0.2.24"
+    "typeorm": "0.2.25"
   },
   "devDependencies": {
     "@foal/cli": "^1.9.0",
